@@ -1,6 +1,7 @@
 package com.example.appsecurity.controller;
 
 
+import com.example.appsecurity.dto.LoginRequestDto;
 import com.example.appsecurity.entity.User;
 import com.example.appsecurity.request.RegisterRequest;
 import com.example.appsecurity.service.AuthService;
@@ -25,5 +26,12 @@ public class AuthController {
           authService.register(request);
           return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "success"));
 
+    }
+
+    @PostMapping("login")
+    public ResponseEntity<String> login(@Valid @RequestBody LoginRequestDto dto)
+    {
+        String response = authService.login(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
